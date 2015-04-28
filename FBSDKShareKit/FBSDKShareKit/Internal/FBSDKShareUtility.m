@@ -482,7 +482,12 @@ forShareOpenGraphContent:(FBSDKShareOpenGraphContent *)openGraphContent
     }
   }];
   if ([data count]) {
-    dictionary[@"data"] = data;
+      if (dictionary[@"fbsdk:create_object"]) {
+          dictionary[@"data"] = data;
+      }
+      else {
+          dictionary = data;
+      }
   }
   return dictionary;
 }
