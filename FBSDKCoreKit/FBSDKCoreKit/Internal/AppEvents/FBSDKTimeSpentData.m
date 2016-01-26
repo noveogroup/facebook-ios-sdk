@@ -137,7 +137,7 @@ static const long INACTIVE_SECONDS_QUANTA[] =
 - (void)instanceSuspend
 {
 
-  [FBSDKAppEventsUtility ensureOnMainThread];
+  [FBSDKAppEventsUtility ensureOnMainThread:NSStringFromSelector(_cmd) className:NSStringFromClass([self class])];
   if (!_isCurrentlyLoaded) {
     FBSDKConditionalLog(YES, FBSDKLoggingBehaviorInformational, @"[FBSDKTimeSpentData suspend] invoked without corresponding restore");
     return;
@@ -162,7 +162,7 @@ static const long INACTIVE_SECONDS_QUANTA[] =
     FBSDKTimeSpentPersistKeyLastSuspendTime : @(now)
     };
 
-  NSString *content = [FBSDKInternalUtility JSONStringForObject:timeSpentData error:NULL];
+  NSString *content = [FBSDKInternalUtility JSONStringForObject:timeSpentData error:NULL invalidObjectHandler:NULL];
 
   [content writeToFile:[FBSDKAppEventsUtility persistenceFilePath:FBSDKTimeSpentFilename]
             atomically:YES
@@ -182,7 +182,7 @@ static const long INACTIVE_SECONDS_QUANTA[] =
 - (void)instanceRestore:(BOOL)calledFromActivateApp
 {
 
-  [FBSDKAppEventsUtility ensureOnMainThread];
+  [FBSDKAppEventsUtility ensureOnMainThread:NSStringFromSelector(_cmd) className:NSStringFromClass([self class])];
 
   // It's possible to call this multiple times during the time the app is in the foreground.  If this is the case,
   // just restore persisted data the first time.

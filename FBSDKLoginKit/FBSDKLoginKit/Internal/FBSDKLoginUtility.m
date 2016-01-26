@@ -26,35 +26,6 @@
 
 @implementation FBSDKLoginUtility
 
-+ (BOOL)isPublishPermission:(NSString *)permission
-{
-  return [permission hasPrefix:@"publish"] ||
-  [permission hasPrefix:@"manage"] ||
-  [permission isEqualToString:@"ads_management"] ||
-  [permission isEqualToString:@"create_event"] ||
-  [permission isEqualToString:@"rsvp_event"];
-}
-
-+ (BOOL)areAllPermissionsReadPermissions:(NSSet *)permissions
-{
-  for (NSString *permission in permissions) {
-    if ([[self class] isPublishPermission:permission]) {
-      return NO;
-    }
-  }
-  return YES;
-}
-
-+ (BOOL)areAllPermissionsPublishPermissions:(NSSet *)permissions
-{
-  for (NSString *permission in permissions) {
-    if (![[self class] isPublishPermission:permission]) {
-      return NO;
-    }
-  }
-  return YES;
-}
-
 + (NSString *)stringForAudience:(FBSDKDefaultAudience)audience
 {
   switch (audience) {
@@ -106,23 +77,10 @@
   return userID;
 }
 
-+ (void)extractPermissionsFromResponse:(NSDictionary *)responseObject
-                    grantedPermissions:(NSMutableSet *)grantedPermissions
-                   declinedPermissions:(NSMutableSet *)declinedPermissions
+- (instancetype)init
 {
-  NSArray *resultData = responseObject[@"data"];
-  if (resultData.count > 0) {
-    for (NSDictionary *permissionsDictionary in resultData) {
-      NSString *permissionName = permissionsDictionary[@"permission"];
-      NSString *status = permissionsDictionary[@"status"];
-
-      if ([status isEqualToString:@"granted"]) {
-        [grantedPermissions addObject:permissionName];
-      } else if ([status isEqualToString:@"declined"]) {
-        [declinedPermissions addObject:permissionName];
-      }
-    }
-  }
+  FBSDK_NO_DESIGNATED_INITIALIZER();
+  return nil;
 }
 
 @end

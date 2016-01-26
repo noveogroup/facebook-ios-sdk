@@ -22,16 +22,9 @@
 
 @interface FBSDKLoginUtility : NSObject
 
-+ (BOOL)isPublishPermission:(NSString *)permission;
-+ (BOOL)areAllPermissionsReadPermissions:(NSSet *)permissions;
-+ (BOOL)areAllPermissionsPublishPermissions:(NSSet *)permissions;
 + (NSString *)stringForAudience:(FBSDKDefaultAudience)audience;
 + (NSDictionary *)queryParamsFromLoginURL:(NSURL *)url;
 
 + (NSString *)userIDFromSignedRequest:(NSString *)signedRequest;
-
-+ (void)extractPermissionsFromResponse:(NSDictionary *)responseObject
-                    grantedPermissions:(NSMutableSet *)grantedPermissions
-                   declinedPermissions:(NSMutableSet *)declinedPermissions;
 
 @end

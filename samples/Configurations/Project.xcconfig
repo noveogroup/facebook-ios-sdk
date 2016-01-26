@@ -17,8 +17,7 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 // Architectures
-// 3GS+
-ARCHS = arm64 armv7 armv7s
+ARCHS = i386 armv7 x86_64 arm64
 IPHONEOS_DEPLOYMENT_TARGET = 7.0
 SDKROOT = iphoneos
 
@@ -34,7 +33,7 @@ INFOPLIST_FILE = $(TARGET_NAME)/$(TARGET_NAME)-Info.plist
 
 // Search Paths
 ALWAYS_SEARCH_USER_PATHS = NO
-FRAMEWORK_SEARCH_PATHS = $(inherited) "$(SRCROOT)/../../build" "$(SRCROOT)/../../Bolts-IOS/build/ios" "~/Documents/FacebookSDK"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "$(SRCROOT)/../../build" "$(SRCROOT)/../../Bolts-IOS/build/ios"
 
 // Code Generation
 GCC_DYNAMIC_NO_PIC = NO
